@@ -9,7 +9,8 @@ module.exports = {
       fontFamily: {
         staatliches: ['"Staatliches"', '"cursive"'],
         nunito: ['"Nunito"', '"sans-serif"'],
-        oswald:['"Coiro"','"sans-serif"']
+        oswald:['"Coiro"','"sans-serif"'],
+        noto:['"Noto Sans"', '"sans-serif"']
       },
     },
   },
