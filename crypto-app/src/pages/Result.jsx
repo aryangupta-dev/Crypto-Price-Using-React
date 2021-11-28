@@ -14,33 +14,38 @@ function Result() {
   const [volume_1hrs_usd, setVolume_1hrs_usd] = useState("");
   const [symbol, setSymbol] = useState("");
   const[type,setType]=useState("");
+ 
   const site =
     "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_128/";
   async function getUsers() {
-    const inst = await axios.get(
-      `https://rest.coinapi.io/v1/assets/${b}?apikey=18D17C6D-9B3C-433C-9D00-8503797497E2`
-    );
-    if(inst.data.error){
-      console.log("ll");
-      alert("WRONG DETAILS");
-      history.push(`/home`);
-    }else{
+    await axios.get(
+      `https://rest.coinapi.io/v1/assets/${b}?apikey=95C60F55-CE57-44A0-A0F1-F4DE9DEBFB4C`
+    ).then((response) => {
+      if(!response.data.error){
+      const inst=response.data;
+      console.log(inst);
+      setImage((inst[0].id_icon).replaceAll("-", ""));
+      setName(inst[0].name);
+      setPrice(inst[0].price_usd);
+      setVolume_1day_usd(inst[0].volume_1day_usd);
+      setVolume_1hrs_usd(inst[0].volume_1hrs_usd);
+      setSymbol(inst[0].asset_id);
+      setType(inst[0].type_is_crypto);
+    }
+      else{
+        alert("Wrong entry");
+        history.push("/");
+      }
     
    
-    setImage((inst.data[0].id_icon).replaceAll("-", ""));
-    setName(inst.data[0].name);
-    setPrice(inst.data[0].price_usd);
-    setVolume_1day_usd(inst.data[0].volume_1day_usd);
-    setVolume_1hrs_usd(inst.data[0].volume_1hrs_usd);
-    setSymbol(inst.data[0].asset_id);
-    setType(inst.data[0].type_is_crypto)
-  }
+    
+  });
   }
   useEffect(() => {
    
     const interval = setInterval(() => {
       getUsers();
-   }, 5000);
+   }, 2000);
    return () => clearInterval(interval);
   }, []);
 
