@@ -18,29 +18,24 @@ function Result() {
   const site =
     "https://s3.eu-central-1.amazonaws.com/bbxt-static-icons/type-id/png_128/";
   async function getUsers() {
-    await axios.get(
+   try{
+    const inst=await axios.get(
       `https://rest.coinapi.io/v1/assets/${b}?apikey=95C60F55-CE57-44A0-A0F1-F4DE9DEBFB4C`
-    ).then((response) => {
-      if(!response.data.error){
-      const inst=response.data;
-      console.log(inst);
-      setImage((inst[0].id_icon).replaceAll("-", ""));
-      setName(inst[0].name);
-      setPrice(inst[0].price_usd);
-      setVolume_1day_usd(inst[0].volume_1day_usd);
-      setVolume_1hrs_usd(inst[0].volume_1hrs_usd);
-      setSymbol(inst[0].asset_id);
-      setType(inst[0].type_is_crypto);
-    }
-      else{
-        alert("Wrong entry");
-        history.push("/");
-      }
-    
-   
-    
-  });
+    )
+    console.log(inst.data[0]);
+    setImage((inst.data[0].id_icon).replaceAll("-", ""));
+    setName(inst.data[0].name);
+    setPrice(inst.data[0].price_usd);
+    setVolume_1day_usd(inst.data[0].volume_1day_usd);
+    setVolume_1hrs_usd(inst.data[0].volume_1hrs_usd);
+    setSymbol(inst.data[0].asset_id);
+    setType(inst.data[0].type_is_crypto)
+   }catch (error) { 
+     alert("Wrong entry");
+    history.push(`/`);
+   }
   }
+  
   useEffect(() => {
    
     const interval = setInterval(() => {
