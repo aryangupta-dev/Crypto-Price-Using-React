@@ -27,8 +27,10 @@ function Home() {
   const r = "XRP";
   const l = "LUNA";
   const submit=()=>{
-    
-    history.push(`/result/${input}`);
+    try{
+    history.push(`/result/${input}`);}catch(error){
+      
+    }
   }
   const Bitcoin = () => {
    
