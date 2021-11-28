@@ -21,8 +21,7 @@ function Result() {
    try{
     const inst=await axios.get(
       `https://rest.coinapi.io/v1/assets/${b}?apikey=95C60F55-CE57-44A0-A0F1-F4DE9DEBFB4C`
-    )
-    console.log(inst.data[0]);
+    );
     setImage((inst.data[0].id_icon).replaceAll("-", ""));
     setName(inst.data[0].name);
     setPrice(inst.data[0].price_usd);
@@ -32,6 +31,7 @@ function Result() {
     setType(inst.data[0].type_is_crypto)
    }catch (error) { 
      alert("Wrong entry");
+     
     history.push(`/`);
    }
   }
@@ -40,7 +40,7 @@ function Result() {
    
     const interval = setInterval(() => {
       getUsers();
-   }, 2000);
+   }, 5000);
    return () => clearInterval(interval);
   }, []);
 
